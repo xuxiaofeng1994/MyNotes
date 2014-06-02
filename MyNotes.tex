@@ -1,0 +1,74 @@
+\documentclass{book}
+
+\usepackage{CJK}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+
+\usepackage{setspace}
+\linespread{1.5}
+
+\usepackage{listings}
+\lstset{
+	language={C},
+	frame=single,
+	frameround=tttt,
+	numbers=left,
+	numberstyle=\color{gray},
+	commentstyle=\color{green},
+	keywordstyle=\bf,
+	tabsize=2,
+	breaklines=true,
+	basicstyle=\footnotesize\ttfamily,
+	escapeinside=``
+}
+
+\usepackage{xcolor}
+
+\usepackage{titlesec}
+
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{25pt}
+
+\usepackage[
+	CJKbookmarks=true,
+	pdftex,
+	colorlinks,
+	linkcolor=black,
+	anchorcolor=black,
+	citecolor=black]{hyperref}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+\title{开始检索吧！}
+\author{Kaleo}
+\date{}
+\maketitle
+\tableofcontents
+\chapter*{这是我的成长日记！}
+记录我的点点滴滴。。。。
+\newpage
+\chapter*{单片机}
+\addcontentsline{toc}{chapter}{单片机}
+
+这里记录关于单片机，嵌入式等信息。
+\newpage
+\section{52单片机在12Mhz晶振下达到9600Hz波特率串口通信的实现}
+51及52单片机默认采用的是T1作为串口方式1和方式3的定时器，但是当单片机的外部振荡晶振为12Mhz的时候，
+在高波特率下的误差很大，到9600波特率的时候其误差达到了8.51\%，这么大的误差不可用的，因而我们换一种
+定时器T2。T2在52及以上芯片里有，下面是其用法:
+\begin{lstlisting}
+RCAP2L = 0xD9;
+RCAP2H = 0xFF;
+//`这两句为波特率为9600Hhz时所对应的RCAP寄存器的初值`
+
+T2CON = 0x34;
+//`RCLK = 1,TCLK = 1，TR2 = 1`
+
+SCON = 0x50;
+//`串口工作模式1,接收使能`
+\end{lstlisting}
+初始化上述这段代码，就能在程序中使用9600Hz的串口通信了。
+\newpage
+\end{CJK}
+\end{document}
