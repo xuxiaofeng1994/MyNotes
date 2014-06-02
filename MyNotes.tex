@@ -1,6 +1,6 @@
 \documentclass{book}
 
-%------------------------------------
+%----------------------------------
 
 \usepackage{CJK}
 
@@ -72,8 +72,8 @@
 
 %------------------------------------------
 
-\section*{52单片机在12Mhz晶振下达到9600Hz波特率串口通信的实现}
-\addcontentsline{toc}{section}{52MCU 12Mhz 9600}
+\section{52MCU 12Mhz Xtal 9600Hz Brid }
+%\addcontentsline{toc}{section}{52MCU 12Mhz 9600}
 
 51及52单片机默认采用的是T1作为串口方式1和方式3的定时器，但是当单片机的外部振荡晶振为12Mhz的时候，
 在高波特率下的误差很大，到9600波特率的时候其误差达到了8.51\%，这么大的误差不可用的，因而我们换一种
@@ -81,7 +81,7 @@
 \begin{lstlisting}
 RCAP2L = 0xD9;
 RCAP2H = 0xFF;
-//`这两句为波特率为9600Hhz时所对应的RCAP寄存器的初值`
+//`这两句为波特率为9600Hz时所对应的RCAP寄存器的初值`
 
 T2CON = 0x34;
 //`RCLK = 1,TCLK = 1，TR2 = 1`
@@ -93,6 +93,15 @@ SCON = 0x50;
 \newpage
 
 %---------------------------------------------
+
+\section{52MCU ultrasonic wave}
+%\addcontentsline{toc}{section}{52MCU Ultrasonic Wave}
+
+这个程序本来很简单，但是其中的串口程序让我苦逼了两天，主要是12Mhz的问题（见上一个问题），这个程序的功能是驱动超声波模块測出距离，然后把结果发送到串口上来，代码如下：
+
+
+\newpage
+%---------------------------------------------
 \chapter*{OpenSource}
 \addcontentsline{toc}{chapter}{OpenSource}
 所有有趣的开源软件的相关问题。
@@ -101,10 +110,9 @@ SCON = 0x50;
 
 %---------------------------------------------
 
-\section*{LaTeX中生成中文目录超链接和目录检索的问题}
-\addcontentsline{toc}{section}{LaTeX Chinese Contents Index}
+\section{LaTeX Chinese Contents Index}
+%\addcontentsline{toc}{section}{LaTeX Chinese Contents Index}
 
-所有有趣的开源软件的相关问题。
 在LaTeX中使用中文总有些蛋疼的问题。
 要生成中文目录，用hyperref就行了，如下：
 
@@ -135,6 +143,72 @@ usepackage[pdftex,
 网上还有一种方法，使用什么g...程序将中间文件转码，那个有空再看看吧，先用第一种方案用着吧
 
 \newpage
+%---------------------------------------------
+
+\section{matlab install}
+%\addcontentsline{toc}{section}{matlab install}
+
+1.解压缩“Mathworks Matlab R2013b Linux.rar”(无需密码),得
+到“Mathworks.Matlab.R2013b.Linux.rar”和“Readme.txt”
+
+2.继续解压缩“Mathworks.Matlab.R2013b.Linux.rar”,此时需要密码,密码为“tone”,解压完成之后得到“R2013b\_UNIX.iso”和名为“patch”的破解文件文件夹.
+
+3.继续解压缩“R2013b\_UNIX.iso”到一个文件夹中(我假设这个文件夹名字为R2013b\_UNIX,）然后用破解文件夹中的“patch/Matlab-2013b-Lin64/install\_jar/install.jar”替换“R2013b\_UNIX/java/jar/install.jar”
+
+4.在终端中切换到“R2013b\_UNIX”目录并输入“install”开始安装MATLAB
+
+5.选择不联网安装(withoutinternet),序列号(install key)输入“50099-21292-14201-03250-24790-41816-23907-62461-58657-24048-55364-08874-18566-22288”或者”24301-62136-21555-63628-23951-18882-23524-13990-17158-47212-41804-63025-63883-42443“
+
+6.安装到最后会提示你激活,还是选择”without internet“,然后激活文件选择破解文件夹中的”patch/Matlab-2013b-Lin64/matlab\_std.dat“
+
+7.最后,需要用破解文件夹中的”patch/Matlab-2013b-Lin64/libmwservices.so“替换”/usr/local/MATLAB/R2013b/bin/glnxa64/libmwservices.so
+
+8.在终端输入“/usr/local/MATLAB/R2013b/bin/matlab”开始使用MATLAB
+
+\newpage
+%---------------------------------------------
+
+\section{LaTeX install}
+%\addcontentsline{toc}{section}{LaTeX install}
+
+1.下载安装包，安装
+
+2.设置环境变量：在/home/.profile中添加这几个环境变量：
+
+\begin{lstlisting}
+PATH="opt/texlive/2013/bin/x86_64-linux:$PATH"
+MANPATH="opt/texlive/2013/texmf-dist/doc/man:$MANPATH"
+INFOPATH="opt/texlive/2013/texmf-dist/doc/info:$INFOPATH"
+\end{lstlisting}
+
+%\newpage	
+%---------------------------------------------
+
+\section{vim profile}
+
+\begin{lstlisting}
+set nu
+set hlsearch
+set autoindent
+set ruler
+set showmode
+set backspace=2
+syntax on
+colorscheme elflord
+\end{lstlisting}
+
+%\newpage
+%---------------------------------------------
+
+\section{LaTeX comment}
+\begin{lstlisting}
+1. %
+2. \if false .....\fi
+3. \usepackage{verbatim}
+	\begin{comment}
+	\end{comment}
+\end{lstlisting}
+
 %---------------------------------------------
 \end{CJK}
 \end{document}
